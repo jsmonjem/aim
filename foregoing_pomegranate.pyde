@@ -7,21 +7,24 @@ def generarObjetivo(velx,vely): #definir las coordenadas donde se encuentra el o
         
 def impacto(x,y,z): #determinar si la mira esta sobre el objetivo.
     return sqrt((mouseX - x)**2 + (mouseY - y)**2) <= z / 2
+   
+def dibujarObjetivo(x, y, z, filling=0):
+    noStroke()
+    for i in range(5, 0, -1):
+        fill(filling + i * 12)
+        circle(x, y, z * (i / 5.0))
 
-
-def dibujarObjetivo(x,y,z,filling=0): #dibujar objetivo en la icion x,y, tama;o z.
-    fill(filling)
-    stroke(115)
-    circle(x,y,z)
-    
-def mira(): #dibuar la mira en el canvassss.
+def mira(sens=0.5): #dibuar la mira en el canvassss.
     fill(255,32,9)
-    stroke(255,199,191)
-    circle(mouseX,mouseY,10)
+    algo=5
+    for i in range(5, 0, -1):
+        fill(255*algo/i, 32*algo/i, 9*algo/i)
+        circle(mouseX, mouseY, 10 * (i / 5.0))
     
 def mostrarpuntaje(puntaje): #dibujar un puntaje en el canvassss
     fill(0)
     textSize(32)
+    textAlign(LEFT, CENTER)
     text("puntaje: "+ str(puntaje), width/20, height/20)    
 
 def menuPrincipal():
@@ -187,8 +190,10 @@ enMovimiento = False
 #################################################################################
     
 def setup():
-    size(1366,768)
+    #fullScreen()
     #size(600,400)
+    size(1366,768)
+    
     noCursor()
     frameRate(144)
     
